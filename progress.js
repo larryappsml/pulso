@@ -1,12 +1,12 @@
 /* Shared, deterministic progress rules. No network or personal data transmission. */
 (function(root){
-  const BASE={morning:50,evening:50,breath:30,control:100};
+  const BASE={morning:50,evening:50,breath:30,extra:50,control:100};
   const key=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
   const previous=date=>{const [y,m,d]=date.split('-').map(Number);return key(new Date(y,m-1,d-1,12));};
   function migrate(data){
     if(!Array.isArray(data.activities))data.activities=[];
     const ids=new Set(data.activities.map(a=>a.id));
-    for(const [date,day] of Object.entries(data.days||{}))for(const type of ['morning','evening','breath']){
+    for(const [date,day] of Object.entries(data.days||{}))for(const type of ['morning','evening','breath','extra']){
       const id=`legacy:${date}:${type}`;
       if(Number.isFinite(day[type])&&!ids.has(id)&&!data.activities.some(a=>a.date===date&&a.type===type)){
         data.activities.push({id,date,type,at:day[type]});ids.add(id);
@@ -30,9 +30,10 @@
       next:level*level*100,base:(level-1)*(level-1)*100};
   }
   function valid(v){
-    if(!v||typeof v!=='object'||!v.days||Array.isArray(v.days)||!Number.isInteger(v.level)||v.level<0||v.level>(v.kegelTimingVersion===3?5:3)||![2,3].includes(v.goal))return false;
-    if(Object.entries(v.days).some(([date,d])=>!/^\d{4}-\d{2}-\d{2}$/.test(date)||!d||typeof d!=='object'||Object.entries(d).some(([k,t])=>!['_goal','morning','evening','breath'].includes(k)||(k==='_goal'?![2,3].includes(t):!Number.isFinite(t)||t<0))))return false;
+    if(!v||typeof v!=='object'||!v.days||Array.isArray(v.days)||!Number.isInteger(v.level)||v.level<0||v.level>(v.kegelTimingVersion===4?9:v.kegelTimingVersion===3?5:3)||![2,3].includes(v.goal))return false;
+    if(Object.entries(v.days).some(([date,d])=>!/^\d{4}-\d{2}-\d{2}$/.test(date)||!d||typeof d!=='object'||Object.entries(d).some(([k,t])=>!['_goal','morning','evening','breath','extra'].includes(k)||(k==='_goal'?![2,3].includes(t):!Number.isFinite(t)||t<0))))return false;
     if(v.activities!==undefined&&(!Array.isArray(v.activities)||v.activities.some(a=>!a||typeof a.id!=='string'||!BASE[a.type]||!/^\d{4}-\d{2}-\d{2}$/.test(a.date)||!Number.isFinite(a.at)||(a.type==='control'&&(!Number.isInteger(a.quality)||a.quality<1||a.quality>10||!Number.isFinite(a.seconds)||a.seconds<1||!Number.isInteger(a.intervals)||a.intervals<0)))))return false;
+    if(v.routinePlan!==undefined&&!root.PulsoRoutines.valid(v.routinePlan))return false;
     return true;
   }
   class RhythmClock{

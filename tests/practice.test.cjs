@@ -1,23 +1,9 @@
-const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
-const source=fs.readFileSync(__dirname+'/../practice.js','utf8').replace(/practiceState\(\);render\(\);\s*$/,'');
-const ctx={assert,data:{level:0,activities:[]},levels:Array.from({length:6},()=>({})),save(){},prepare(){},addActivity(){},showJourneyCompletion(){},render(){},startSession(){},togglePause(){},$:()=>null};
-vm.createContext(ctx);vm.runInContext(source,ctx);
-vm.runInContext(`
-function add(type,date,stage=data.level){data.activities.push({id:String(data.activities.length),type,date,trainingStage:stage});return practiceCredit(type,date,stage);}
-assert.equal(practiceCount(),0);
-add('morning','2026-10-01');assert.equal(practiceCount(),0);
-add('breath','2026-10-01');assert.equal(practiceCount(),0);
-add('evening','2026-10-01');assert.equal(practiceCount(),1);
-add('evening','2026-10-01');assert.equal(practiceCount(),1);
-for(const date of ['2026-10-03','2026-10-04','2026-10-07']){add('morning',date);add('evening',date);}
-assert.equal(practiceCount(),4);assert.equal(data.level,0);
-add('morning','2026-10-08');assert.equal(data.level,0);assert.equal(practiceCount(),4);
-assert.equal(add('evening','2026-10-08').to,1);assert.equal(data.level,1);assert.equal(practiceCount(),0);
-add('morning','2026-10-08');add('evening','2026-10-08');assert.equal(practiceCount(),0);
-add('morning','2026-10-09',0);add('evening','2026-10-09',1);assert.equal(practiceCount(),0);
-add('morning','2026-10-09',1);assert.equal(practiceCount(),1);
-data=JSON.parse(JSON.stringify(data));assert.equal(practiceCount(),1);
-data.level=5;assert.equal(practiceCount(),0);
-for(let n=10;n<20;n++){add('morning','2026-10-'+n);add('evening','2026-10-'+n);}
-assert.equal(data.level,5);assert.equal(practiceCount(),5);assert.equal(practiceState().days.length,5);
-`,ctx);console.log('PASS: both Kegel sessions required; breathing optional and never substitutes; five complete distinct days; no duplicate credits; same-level requirement; persistence and final-level cap.');
+const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');let id=0;
+const nodes={};const c={assert,Date,crypto:{randomUUID:()=>String(++id)},data:{level:0,days:{},activities:[],habits:[{id:'untouched',at:1}]},save(){},dayKey:()=> '2026-10-22',window:{},prepare(){},finish(){throw Error('Unexpected legacy finish');},render(){},startSession(){},togglePause(){},showJourneyCompletion(){},premiumIcon:()=>'',fmt:s=>String(s),cleanup(){},closeSession(){},navigate(){},active:null,document:{querySelectorAll:()=>[]},$:s=>nodes[s]??={innerHTML:'',hidden:true,dataset:{},setAttribute(){}}};
+c.addActivity=(type,extra)=>{if(c.data.activities.some(a=>a.type===type&&a.date===c.dayKey()))return 0;c.data.activities.push({id:'xp'+(++id),type,date:c.dayKey(),at:Date.now(),...extra});return 50;};
+vm.createContext(c);vm.runInContext(fs.readFileSync(__dirname+'/../routines.js','utf8'),c);vm.runInContext(fs.readFileSync(__dirname+'/../practice.js','utf8').replace(/routineState\(\);render\(\);\s*$/,''),c);vm.runInContext('showRoutineCompletion=function(){};',c);
+c.prepare('morning');assert.equal(c.active.totalSeconds,96);c.active.started=true;c.finish();assert.equal(c.data.routinePlan.day,0);assert.equal(c.data.activities.length,1);
+c.prepare('evening');c.active.started=true;c.finish();assert.equal(c.data.routinePlan.day,1);assert.equal(c.data.activities.length,2);
+c.prepare('extra');assert.equal(c.active.routine.day,0);c.active.started=true;c.finish();assert.equal(c.data.activities.length,3);assert.equal(c.data.routinePlan.day,1);
+c.prepare('replay',{level:0,day:0});c.active.started=true;c.finish();assert.equal(c.data.activities.length,3);assert.equal(c.data.routinePlan.day,1);assert.equal(c.data.routinePlan.sessions.length,4);assert.equal(c.data.habits[0].id,'untouched');
+vm.runInContext('assert(R.valid(data.routinePlan));',c);console.log('PASS: session integration, two-required advancement, third retains today routine, replay preserves XP/cursor, habit data retained.');
