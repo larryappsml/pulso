@@ -82,8 +82,10 @@ render=function(){
  if(tab==='hoy'){
  const hero=$('.hero');hero.querySelector('h2').textContent=c===2?'Día completado':'Dos momentos para ti';hero.querySelector('.ring').style.setProperty('--progress',(c/2*100)+'%');hero.querySelector('.ring strong').innerHTML=c+'<span style="font-size:19px"> / 2</span>';hero.querySelector('.ring small').textContent='KEGEL COMPLETADOS';
  hero.querySelector('.eyebrow').textContent=routineLabel(a);
- $('#premium-start').innerHTML=(c===2?'Ver rutina':'Empezar')+' '+premiumIcon('arrow');$('#premium-start').onclick=()=>c===2?openRoutineDetail(a.level,a.day):prepare(!a.slots.morning?'morning':'evening');
- const grid=$('.routine-grid');grid.innerHTML=routineCard('morning','Kegel · 1',a.slots.morning?'Completada':fmt(R.duration(r))+' min','strength',!!a.slots.morning)+routineCard('evening','Kegel · 2',a.slots.evening?'Completada':fmt(R.duration(r))+' min','target',!!a.slots.evening)+routineCard('extra','Kegel · 3',a.slots.extra?'Completada · Opcional':'Opcional · '+fmt(R.duration(r))+' min','strength',!!a.slots.extra||c<2)+routineCard('breath','Respiración',today().breath?'Completada':'2 min · Aparte del recorrido','breath',!!today().breath)+routineCard('control','Control de ritmo','Libre','rhythm');
+ const optionalReady=c===2&&!a.slots.extra;
+ $('#premium-start').innerHTML=(optionalReady?'Sesión opcional':c===2?'Ver rutina':'Empezar')+' '+premiumIcon('arrow');
+ $('#premium-start').onclick=()=>optionalReady?prepare('extra'):c===2?openRoutineDetail(a.level,a.day):prepare(!a.slots.morning?'morning':'evening');
+ const grid=$('.routine-grid');grid.innerHTML=routineCard('morning','Kegel · 1',a.slots.morning?'Completada':fmt(R.duration(r))+' min','strength',!!a.slots.morning)+routineCard('evening','Kegel · 2',a.slots.evening?'Completada':fmt(R.duration(r))+' min','target',!!a.slots.evening)+routineCard('breath','Respiración',today().breath?'Completada':'2 min · Aparte del recorrido','breath',!!today().breath)+routineCard('control','Control de ritmo','Libre','rhythm');
  document.querySelectorAll('[data-routine-session]').forEach(b=>b.onclick=()=>prepare(b.dataset.routineSession));
  if(xp)xp.insertAdjacentHTML('beforeend','<p class="practice-caption">'+(a.completed?'Hoy completado · Próxima rutina mañana':c+'/2 Kegel completados hoy')+'</p>');
  }
