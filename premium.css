@@ -192,3 +192,33 @@ nav button span{font-size:14px}
 #session .block-timeline .timeline-times{display:none}
 #session .block-timeline{margin-bottom:26px}
 @media(max-width:650px){#session .session-body:has(#pause) .block-timeline{margin-bottom:26px}}
+
+/* Warm orange accents with sage reserved for calm and completion. */
+body{background:#151619}
+aside{background:#191a1f;border-color:#303138}
+.workout,.card,.level{background-color:#22242b;border-color:#383a43}
+.hero{background:linear-gradient(115deg,#392d24,#29272a);border-color:#72503a80;box-shadow:0 12px 40px #00000010}
+.hero .eyebrow{color:#e6b18c}.hero h2{color:#f5e9de}
+.ring{background:conic-gradient(#efb48a var(--progress),#67503c 0)}
+.ringinner{background:#362c24}
+.workout{background:linear-gradient(130deg,#ca8d5b0b,transparent 65%),#22242b}
+.workout-icon{background:#483226;color:#efb68e}
+.workout>button:not(:disabled){background:#493328;color:#f0c09c}
+.workout>button:not(:disabled):hover{background:#5b3d2c}
+.workout:has([data-routine-session="breath"]) .workout-icon{background:#2f3d34;color:#b8ceb9}
+.workout:has([data-routine-session="breath"])>button:not(:disabled){background:#303e35;color:#bad0ba}
+.workout:has(button:disabled){border-color:#52655355;background:linear-gradient(130deg,#8fae8909,transparent 65%),#22262a}
+.workout:has(button:disabled) .workout-icon,.workout>button:disabled{background:#304034;color:#bad0b6}
+.xp-card{border-color:#8260445c}
+.xp-card .eyebrow,.habit-card .eyebrow,.routine-overview .eyebrow{color:#d6a583}
+.xp-card .progress-track{background:#45392f}
+.xp-card .progress-track>div{background:linear-gradient(90deg,#bd8257,#edb58d)}
+.habit-add{background:#493125;border-color:#bd8c6266;color:#f1c6a4}
+.habit-add:hover{background:#583b2b}
+nav button.active{background:#493023;color:#f0bd98}
+.day.complete i,.history div.complete{background:#354b3b;color:#c7dec2}
+.day.today.complete i{border-color:#9db593;background:#354b3b;color:#d3e8cc}
+.routine-day.current{background:#3b2d23;border-color:#bc8c626e}
+.routine-day.done{background:#26342b;border-color:#65795d55}
+.routine-day.done .routine-day-state{color:#bed4b6}
+@media(max-width:650px){body{background:#151619}aside{background:#1d1e24ef}nav button.active{background:transparent;color:#efb58d}}
