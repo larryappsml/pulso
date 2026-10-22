@@ -36,16 +36,17 @@
     if(v.routinePlan!==undefined&&!root.PulsoRoutines.valid(v.routinePlan))return false;
     return true;
   }
+  const COOLDOWN_MS=30000;
   class RhythmClock{
     constructor(now=()=>performance.now()){this.now=now;this.mode='ready';this.elapsed=0;this.intervals=0;this.suspended=false;}
     start(){this.mode='running';this.last=this.now();}
     update(){if(this.suspended)return;const n=this.now(),delta=Math.max(0,n-this.last);if(this.mode==='running')this.elapsed+=delta;if(this.mode==='cooldown'){this.left=Math.max(0,this.left-delta);if(this.left===0)this.mode='resume';}this.last=n;}
-    alert(){this.update();if(this.mode!=='running'||this.suspended)return false;this.mode='cooldown';this.left=45000;this.intervals++;return true;}
+    alert(){this.update();if(this.mode!=='running'||this.suspended)return false;this.mode='cooldown';this.left=COOLDOWN_MS;this.intervals++;return true;}
     resume(){if(this.mode!=='resume')return;this.mode='running';this.last=this.now();}
     suspend(){this.update();this.suspended=true;}
     unsuspend(){this.suspended=false;this.last=this.now();}
     stop(){this.update();this.mode='finished';}
   }
-  root.PulsoProgress={BASE,key,previous,migrate,summary,valid,RhythmClock};
+  root.PulsoProgress={BASE,key,previous,migrate,summary,valid,RhythmClock,COOLDOWN_MS};
 })(typeof window!=='undefined'?window:globalThis);
 

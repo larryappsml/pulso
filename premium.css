@@ -222,3 +222,17 @@ nav button.active{background:#493023;color:#f0bd98}
 .routine-day.done{background:#26342b;border-color:#65795d55}
 .routine-day.done .routine-day-state{color:#bed4b6}
 @media(max-width:650px){body{background:#151619}aside{background:#1d1e24ef}nav button.active{background:transparent;color:#efb58d}}
+
+/* Shared breathing signals and a circular rhythm action. */
+.control-orb{border:0;border-radius:50%;padding:16px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;appearance:none}
+.control-orb:disabled{opacity:1;cursor:default}
+.orb.control-orb strong{font-size:24px;font-weight:500;letter-spacing:-.5px}
+.orb.control-orb.is-countdown strong{font-size:49px;font-weight:350;letter-spacing:-2px}
+.control-orb small{font-size:10px;letter-spacing:1.5px}
+.control-body #cool-phase{font-size:25px;font-weight:500;color:var(--control-phase,#efbd97);margin-bottom:0}
+#session[data-kegel-state=relax] #cool-phase{color:#83d8e8}
+#session[data-kegel-state=paused] #cool-phase{color:#a6aab6}
+.control-body .orb-wrap{margin:24px auto}
+.control-body #cool-view{min-height:44px}
+.control-body .control-actions{margin-top:20px}
+@media(max-width:650px){.control-body{margin-top:20px}.control-body .control-clock{font-size:64px}.control-body .orb-wrap{width:250px;height:250px;margin:18px auto}}

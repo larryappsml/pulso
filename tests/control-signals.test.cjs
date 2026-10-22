@@ -1,0 +1,13 @@
+const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
+let now=0,tones=[];const nodes={};const node=()=>({textContent:'',dataset:{},style:{setProperty(k,v){this[k]=v;}},classList:{toggle(){}},setAttribute(k,v){this[k]=v;}});
+const ctx={window:{},performance:{now:()=>now},fmt:n=>String(n),cuePlay:v=>tones.push(v),$:s=>nodes[s]??=node()};
+vm.createContext(ctx);vm.runInContext(fs.readFileSync(__dirname+'/../progress.js','utf8'),ctx);
+vm.runInContext('const P=window.PulsoProgress;let rhythm=new P.RhythmClock();rhythm.start();',ctx);
+const source=fs.readFileSync(__dirname+'/../features.js','utf8');vm.runInContext(source.slice(source.indexOf('function updateControl()'),source.indexOf('function rateControl()')),ctx);
+now=1000;vm.runInContext('rhythm.alert();updateControl();',ctx);assert.equal(nodes['#control-action-label'].textContent,30);assert.deepEqual(tones,[true]);
+now=2000;ctx.updateControl();assert.equal(tones.length,1);
+now=5000;ctx.updateControl();assert.deepEqual(tones,[true,false]);assert.equal(nodes['#session .orb-wrap'].dataset.state,'relax');
+vm.runInContext('rhythm.suspend();updateControl();',ctx);now=15000;ctx.updateControl();assert.equal(tones.length,2);assert.equal(nodes['#session .orb-wrap'].dataset.state,'paused');
+vm.runInContext('rhythm.unsuspend();updateControl();',ctx);assert.equal(tones.length,2);
+now=41000;ctx.updateControl();assert.equal(nodes['#alert-control'].disabled,false);assert.equal(nodes['#control-action-label'].textContent,'Reanudar');assert.equal(nodes['#control-clock'].textContent,'1');
+console.log('PASS: 30-second control pause, active clock freeze, phase colors, one chime per phase, suspension, manual resume.');
