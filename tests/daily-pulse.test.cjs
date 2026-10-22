@@ -5,5 +5,5 @@ const a={slots:{}};assert.equal(ctx.dailyPulseCount(a),0);a.slots.morning='1';as
 ctx.data.activities.push({type:'breath',date:'2026-10-22'});assert.equal(ctx.dailyPulseCount(a),3);
 ctx.data.activities.push({type:'control',date:'2026-10-22'},{type:'control',date:'2026-10-22'},{type:'extra',date:'2026-10-22'});assert.equal(ctx.dailyPulseCount(a),4);
 assert.equal(ctx.dailyPulseCount({slots:{}},'2026-10-23'),0);
-for(let i=0;i<=4;i++){const m=ctx.dailyPulseMarkup(i);assert(m.includes('aria-label="'+i+' de 4'));assert(m.includes('stroke-dasharray="'+i*25+' 100"'));}
+for(let i=0;i<=4;i++){const m=ctx.dailyPulseMarkup(i);assert(m.includes('aria-label="'+i+' de 4'));assert.equal((m.match(/<path /g)||[]).length,3);assert(!m.includes('NaN'));assert(!m.includes('stroke-dasharray'));assert(m.includes('--daily-scale:'+(.66+i*.085)));}
 console.log('PASS: four daily steps, completed sessions only, repeated control and optional Kegel do not overcount, next-day reset, accessible icon progress.');

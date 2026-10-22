@@ -58,7 +58,11 @@ function dailyPulseCount(a,date=dayKey()){
 }
 function dailyPulseMarkup(count){
  const label=count+' de 4 actividades completadas hoy: dos Kegel, respiración y control de ritmo.';
- return '<span class="daily-pulse" role="img" aria-label="'+label+'" title="'+label+'" style="--daily-scale:'+(.58+count*.105)+';--daily-glow:'+(count*.055)+'"><svg viewBox="0 0 48 48" aria-hidden="true"><circle class="daily-pulse-track" cx="24" cy="24" r="21"/><circle class="daily-pulse-progress" cx="24" cy="24" r="21" pathLength="100" stroke-dasharray="'+(count*25)+' 100"/><path class="daily-pulse-wave" d="M9 25h6l4-10 7 19 5-13 3 4h5"/></svg></span>';
+ const wave=(radius,offset)=>Array.from({length:121},(_,i)=>{
+  const angle=i/120*Math.PI*2,r=radius+(.45+count*.35)*Math.sin(angle*5+offset);
+  return (i?'L':'M')+(24+Math.cos(angle)*r).toFixed(2)+' '+(24+Math.sin(angle)*r).toFixed(2);
+ }).join(' ')+'Z';
+ return '<span class="daily-pulse" role="img" aria-label="'+label+'" title="'+label+'" style="--daily-scale:'+(.66+count*.085)+'"><svg viewBox="0 0 48 48" aria-hidden="true"><g class="daily-circular-wave"><path class="daily-wave-echo outer" d="'+wave(20,0)+'"/><path class="daily-wave-echo" d="'+wave(16,0.35)+'"/><path class="daily-wave-core" d="'+wave(12,0.7)+'"/></g></svg></span>';
 }
 function kegelCard(a,r){
  const count=routineCompleted(a),next=!a.slots.morning?'morning':'evening',done=count===2;
