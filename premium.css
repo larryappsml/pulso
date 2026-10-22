@@ -186,3 +186,9 @@ nav button span{font-size:14px}
 #session .timeline-block-labels .is-current{color:#e5d1bd}
 #session .block-timeline .timeline-times{top:68px;font-size:11px}
 @media(max-width:650px){#session .session-body:has(#pause) .block-timeline{margin-bottom:76px}#session .timeline-block-labels>span,#session .timeline-block-labels small{font-size:11px}}
+
+/* The block timeline is purely visual. */
+#session .session-timeline .timeline-block-labels,
+#session .block-timeline .timeline-times{display:none}
+#session .block-timeline{margin-bottom:26px}
+@media(max-width:650px){#session .session-body:has(#pause) .block-timeline{margin-bottom:26px}}
