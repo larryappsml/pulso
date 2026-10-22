@@ -31,7 +31,7 @@ render=function(){
   }
   if(tab==='guia'){
     $('.setting').parentElement.querySelector('p').textContent='Tu rutina sugerida es independiente de la racha: cualquier combinación de 2 actividades mantiene la constancia. El multiplicador ×1,2 se aplica si el día anterior completaste al menos 2; no se acumula.';
-    $('#file').onchange=async e=>{try{const v=JSON.parse(await e.target.files[0].text());if(!P.valid(v))throw Error();if(confirm('¿Sustituir el historial de este navegador por el archivo?')){data=P.migrate(v);save();render();toast('Progreso importado');}}catch{toast('No se pudo importar: archivo de progreso no válido.');}};
+    $('#file').onchange=async e=>{try{const v=JSON.parse(await e.target.files[0].text());if(!P.valid(v))throw Error();if(confirm('¿Sustituir el historial de este navegador por el archivo?')){data=P.migrate(v);upgradeKegelTimings();save();render();toast('Progreso importado');}}catch{toast('No se pudo importar: archivo de progreso no válido.');}};
   }
 };
 function controlHistory(){const a=data.activities.filter(a=>a.type==='control').slice(-5).reverse();return `<section class="card"><h2>Tu control, con perspectiva</h2><p class="muted">${a.length?'Últimas sesiones · Valoración personal, sin comparaciones.':'Aquí aparecerán las sesiones que completes.'}</p>${a.map(a=>`<div class="control-history"><span>${new Date(a.at).toLocaleDateString('es-ES',{day:'numeric',month:'short'})}</span><span>${fmt(Math.floor(a.seconds))} · ${a.intervals} intervalos</span><b>${a.quality}/10</b></div>`).join('')}</section>`;}
