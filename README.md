@@ -20,3 +20,12 @@ Abrir index.html en un navegador moderno o servir esta carpeta con un servidor e
 ## Ejercicio
 
 Rutinas orientativas, sin promesas médicas. Respirar normalmente durante las contracciones, relajar por completo, detenerse ante molestias. Referencias NHS enlazadas en la guía.
+
+## Control de Ritmo y Puntos de Control
+
+- Cronómetro de tiempo activo, botón de alerta y enfriamiento de 45 segundos con el mismo círculo de respiración. El cronómetro excluye enfriamientos; al terminar estos se reanuda manualmente. Pausa al ocultar la app.
+- Cada pausa suma un intervalo. Completar abre una valoración de 1 a 10; guardar confirma la actividad. Salir sin guardar no concede XP.
+- Kegel: 50 XP; respiración: 30 XP; control: 100 XP por sesión guardada. Nivel = floor(sqrt(XP / 100)) + 1. Rangos: inicial (1–4), intermedio (5–9), avanzado (10+).
+- Cualquier combinación de dos actividades completa la racha diaria. Si ayer hubo al menos dos, todas las actividades de hoy obtienen ×1,2 XP (sin acumular). Ejemplo: Kegel + respiración = 80 XP; al día siguiente control = 120 XP.
+- El historial anterior se migra sin duplicar sesiones y el formato de exportación incluye valoraciones, duración activa e intervalos. La intensidad de Kegel se mantiene independiente del nivel de progreso.
+- Pruebas: `node tests/progress.test.cjs` valida fórmulas, rachas, migración, fechas y transiciones del cronómetro. Interfaz revisada en navegador: iniciar → alerta → valoración → guardar → historial.
