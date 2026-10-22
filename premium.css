@@ -86,3 +86,40 @@ body{background:#111216;color:var(--ink)}aside{background:#15161b;border-color:#
 #session .timeline-elapsed:after{right:-3px;top:17px;width:6px;height:6px;border-radius:50%;background:#f5ede1;box-shadow:0 0 0 3px #f5ede10d}
 #session .session-timeline .timeline-times{display:flex;justify-content:space-between;position:absolute;top:38px;left:0;right:0;width:100%;height:auto;background:none;color:#828793;font-size:10px;font-variant-numeric:tabular-nums;letter-spacing:.4px}
 @media(prefers-reduced-motion:reduce){#session .timeline-wave .timeline-segment{transition:none}}
+
+/* Readable supporting typography, including compact phone navigation. */
+.top{font-size:13px}
+.eyebrow,.hero .eyebrow,.xp-card .eyebrow{font-size:11px;letter-spacing:1.1px;line-height:1.5}
+nav button span{font-size:14px}
+.workout h3{font-size:17px}
+.workout p{font-size:14px;line-height:1.5;max-width:none}
+.workout{min-height:154px}
+.premium-start{font-size:14px;min-height:44px}
+.ring small{font-size:9px;letter-spacing:.4px}
+.xp-top>span,.xp-bottom,.footer-note,.next p{font-size:13px;line-height:1.5}
+.big-number small,.week .day{font-size:13px}
+.guide p,.guide li,.level p,.muted,.checklist li{font-size:15px;line-height:1.65}
+.setting,.setting select,select{font-size:15px}
+.secondary,.textbutton{font-size:14px;min-height:44px}
+.section-head small,.tag{font-size:11px}
+@media(max-width:650px){
+ nav{width:100%;display:flex}
+ nav button{flex:1;min-width:0;min-height:48px;padding:7px 3px}
+ nav button span{font-size:12px;line-height:1.3;white-space:nowrap}
+ .top{font-size:13px}
+ .eyebrow,.hero .eyebrow,.xp-card .eyebrow{font-size:11px;letter-spacing:1px}
+ .hero{padding:22px 19px;gap:14px}
+ .hero h2{font-size:22px}
+ .ring{flex-shrink:0}
+ .ring small{font-size:8px;letter-spacing:.1px}
+ .premium-start{font-size:14px;padding:12px 15px;min-height:44px}
+ .workout{min-height:153px;padding:19px 16px}
+ .workout h3{font-size:16px}
+ .workout p{font-size:13px;line-height:1.5;max-width:none}
+ .xp-top>span,.xp-bottom,.footer-note,.next p,.week .day,.big-number small{font-size:12px}
+ .xp-bottom{flex-wrap:wrap;gap:8px}
+ .guide p,.guide li,.level p,.muted,.checklist li{font-size:15px;line-height:1.65}
+ .setting{flex-wrap:wrap}
+ .setting select{font-size:16px;max-width:100%}
+ .session-head .eyebrow,.session-body>.eyebrow{font-size:11px}
+}
