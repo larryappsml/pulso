@@ -18,19 +18,22 @@ https://pubmed.ncbi.nlm.nih.gov/30979506/
 https://pubmed.ncbi.nlm.nih.gov/42132359/
 
 ## Adaptación de producto, no protocolo clínico validado
-Esta tabla es una implementación orientativa propia de contracciones sostenidas, no una copia de Dr. Kegel o Kegel Trainer ni la reproducción de un ensayo. No sustituye un programa individual; no se afirma que sea superior a la tabla anterior.
+Esta tabla es una implementación orientativa propia de contracciones sostenidas y rápidas, no una copia de Dr. Kegel o Kegel Trainer ni la reproducción de un ensayo. No sustituye un programa individual; no se afirma que sea superior a la tabla anterior.
 
-| Etapa | Contraer | Relajar | Repeticiones | Duración |
-|---|---:|---:|---:|---:|
-| Conectar | 3 s | 6 s | 6 | 54 s |
-| Encontrar el ritmo | 5 s | 10 s | 8 | 120 s |
-| Construir la base | 8 s | 10 s | 8 | 144 s |
-| Consolidar | 10 s | 10 s | 10 | 200 s |
+| Etapa | Largas: contraer/relajar | Repeticiones largas | Rápidas: señal/relajar | Repeticiones rápidas | Duración completa |
+|---|---|---:|---|---:|---:|
+| Conectar | 3 s / 6 s | 6 | 1 s / 3 s | 5 | 94 s |
+| Encontrar el ritmo | 5 s / 10 s | 8 | 1 s / 3 s | 6 | 164 s |
+| Construir la base | 8 s / 10 s | 8 | 1 s / 3 s | 8 | 196 s |
+| Consolidar | 10 s / 10 s | 10 | 1 s / 3 s | 10 | 260 s |
 
-Elección: entrada breve y descansos de al menos la duración de contracción; referencia final de hasta 10 s/10 s. La dosis debe reducirse si pierde calidad. No se han añadido pulsos rápidos automáticamente, pues esta actualización se limita a las series sostenidas existentes.
+Elección: entrada breve y descansos de al menos la duración de contracción; referencia final de hasta 10 s/10 s. La dosis debe reducirse si pierde calidad. Cada sesión integra ambos bloques. Las rápidas son contraer y soltar inmediatamente; el segundo es una ventana de señal del temporizador, no un mantenimiento de la contracción. Los 3 s de recuperación se eligen como adaptación conservadora, no como óptimo demostrado. Se añaden 10 s de descanso entre bloques y 10 s de relajación final, incluidos en la duración. Estos descansos también son decisiones orientativas de producto.
 
 Avance manual secuencial por técnica y comodidad, no por XP o días acumulados. Volver de etapa sigue disponible. Pausar permite ampliar descansos. Las dos sesiones diarias disponibles deben separarse; no se obliga a completarlas si hay fatiga. Dolor, presión o tensión residual requieren detener las contracciones y valoración profesional.
 
 ## Compatibilidad y verificación
 Migración conservadora de etapas antiguas 0,1,2,3 a 0,0,1,1 para no incrementar el tiempo de contracción o las repeticiones automáticamente. Conserva días, actividades y XP; la importación antigua usa la misma migración. Las nuevas selecciones se conservan.
-Pruebas: todas las fases, descansos finales, duraciones 54/120/144/200 s, respiración sin cambios, migración e historial; regresión de XP/rachas/control.
+Pruebas: todas las fases, descansos finales, duraciones 94/164/196/260 s, respiración sin cambios, migración e historial; regresión de XP/rachas/control.
+
+## Sesión combinada
+Una actividad y 50 XP base por sesión completa, sin separar largas y rápidas en recompensas distintas. El contador distingue cada bloque; el progreso refleja segundos reales. Se conserva la pausa manual y al ocultar la app. La sesión no finaliza hasta completar la recuperación final. Salir antes no suma actividad.
