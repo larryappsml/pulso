@@ -7,15 +7,15 @@ App de hábitos de suelo pélvico y respiración. Diseño blanco y verde salvia,
 - Cuatro etapas con avance manual, rachas reales, calendario y exportación/importación.
 - Historial local en el navegador, sin sincronización ni analítica.
 
-## Estado de publicación y privacidad
+## Publicación y privacidad
 
-Repositorio privado. No se ha habilitado GitHub Pages ni publicado una web pública. La app no implementa autenticación propia. Un repositorio privado no convierte una web de Pages en privada. Pages con acceso restringido requiere una organización con GitHub Enterprise Cloud.
+Repositorio público por petición del propietario. App publicada mediante GitHub Pages desde main, carpeta raíz, con HTTPS: https://larryappsml.github.io/pulso/
 
-Para una cuenta personal, mantener todo en GitHub implica conservar el proyecto privado sin un enlace de Pages privado. No se incluyen secretos ni datos personales de salud.
+Sin autenticación. El historial se guarda únicamente en el navegador de cada visitante; no se sincroniza ni se publica en GitHub.
 
 ## Prueba local
 
-Abrir index.html en un navegador moderno o servir esta carpeta con un servidor estático. El uso en iPhone desde la pantalla de inicio requiere un alojamiento HTTPS; no está configurado.
+Abrir index.html en un navegador moderno o servir esta carpeta con un servidor estático. En iPhone, abrir el enlace publicado en Safari → Compartir → Añadir a pantalla de inicio.
 
 ## Ejercicio
 
