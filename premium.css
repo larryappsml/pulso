@@ -58,3 +58,17 @@ body{background:#111216;color:var(--ink)}aside{background:#15161b;border-color:#
 #session[data-kegel-state] #phase{transition:color .35s}#session[data-kegel-state] #seconds{min-width:2ch}
 @media(prefers-reduced-motion:reduce){.orb-wrap[data-state] .orb{transform:none!important;transition:none!important;will-change:auto}.orb-wrap[data-state]:before,.orb-wrap[data-state]:after{transform:none!important;transition:none}.orb-wrap[data-state] .orb:before,.phase-arc{transition:none}}
 
+
+/* Segment widths reflect phase seconds exactly: no gaps or minimum widths. */
+#session .session-timeline{height:10px;position:relative;background:transparent;border-radius:6px;overflow:visible;margin:32px 0}
+#session .session-timeline .timeline-segments{display:flex;position:absolute;inset:0;gap:0;height:10px;width:100%;border-radius:6px;overflow:hidden;background:none}
+#session .timeline-segment{display:block;flex:none;height:100%;margin:0;padding:0;border:0;min-width:0;box-sizing:border-box;box-shadow:inset -1px 0 #11121670;opacity:.62;transition:opacity .2s}
+#session .timeline-segment[data-state=contract]{background:#edb27d}
+#session .timeline-segment[data-state=relax]{background:#7ecbdc}
+#session .timeline-segment.is-complete{opacity:.82}
+#session .timeline-segment.is-current{opacity:1}
+#session .session-timeline .timeline-elapsed{position:absolute;top:0;left:0;width:0;height:10px;border-radius:0;background:none;pointer-events:none}
+#session .timeline-elapsed:after{content:"";position:absolute;right:-1px;top:-4px;width:2px;height:18px;border-radius:2px;background:#f6f2ea;box-shadow:0 0 5px #0008}
+#session .session-timeline:focus-visible{outline:2px solid #edb27d;outline-offset:6px}
+@media(prefers-reduced-motion:reduce){#session .timeline-segment{transition:none}}
+
