@@ -32,3 +32,29 @@ body{background:#111216;color:var(--ink)}aside{background:#15161b;border-color:#
 .aside-label,.aside-bottom{display:none}.top{margin-bottom:27px}.top>.pill{display:none}#main>h1{font-size:35px;letter-spacing:-1.2px;margin:0 0 24px}.hero{min-height:180px;padding:26px;gap:24px}.hero h2{font-size:24px;max-width:250px;margin:12px 0 0}.hero .eyebrow{font-size:8px;letter-spacing:1.2px}.premium-start{margin-top:24px;min-width:130px;justify-content:space-between}.ring{width:110px;height:110px}.ring small{font-size:6px;letter-spacing:.5px}.routine-grid{gap:12px}.workout{min-height:142px;padding:21px}.workout-icon{margin-bottom:17px}.workout h3{font-size:15px;margin:0 0 6px}.workout p{font-size:11px;line-height:1.4}.workout>button{top:24px;right:20px}.section-head{margin:26px 0 15px}.section-head h2{font-size:18px}.card{padding:23px}.xp-card .progress-track{margin-bottom:0}.xp-top{margin-top:14px}.week{margin-top:24px}.right .big-number{margin-top:10px}.right .card{margin-bottom:14px}.right{align-self:start}.control-history{line-height:1.8}
 @media(max-width:650px){main{padding-top:23px}.top{margin-bottom:24px;min-height:30px}#main>h1{font-size:30px;margin-bottom:20px}.hero{min-height:173px;padding:22px;gap:18px}.hero h2{font-size:21px;max-width:180px;letter-spacing:-.6px;line-height:1.25}.hero .eyebrow{font-size:7px}.ring{width:87px;height:87px}.premium-start{font-size:11px;padding:12px 15px;margin-top:21px;min-width:116px}.ring small{font-size:5px}.workout{min-height:137px;padding:18px 17px}.workout-icon{width:33px;height:33px;margin-bottom:15px}.workout h3{font-size:14px}.workout p{font-size:10px}.workout>button{top:22px;right:16px}.section-head{margin-top:25px}.section-head h2{font-size:18px}.right{margin-top:18px}.right .card{padding:22px}.xp-top h2{font-size:24px}.xp-card .progress-track{margin-top:17px}.mobile-wordmark{font-size:26px}}
 
+
+/* Kegel: compact amber contraction, open blue release; text remains explicit. */
+.orb-wrap[data-state]{--phase-color:#83d8e8;--phase-rgb:131,216,232;--phase-remaining:1;border:0;background:radial-gradient(circle,rgba(var(--phase-rgb),.055),transparent 69%);isolation:isolate}
+.orb-wrap[data-state=contract]{--phase-color:#ffc58a;--phase-rgb:255,197,138}
+.orb-wrap[data-state=paused]{--phase-color:#a6aab6;--phase-rgb:166,170,182}
+.orb-wrap[data-state] .orb{position:relative;isolation:isolate;background:radial-gradient(circle at 32% 24%,#d0f6fa,#73b9ca 52%,#315b76);box-shadow:inset 0 2px 7px #ffffff65,0 15px 45px #0004,0 0 42px rgba(var(--phase-rgb),.12);transition-property:transform,box-shadow;transition-timing-function:cubic-bezier(.22,.8,.25,1);will-change:transform}
+.orb-wrap[data-state] .orb:before{content:"";position:absolute;inset:0;border-radius:inherit;background:radial-gradient(circle at 32% 24%,#ffe4b7,#d49a61 52%,#895237);opacity:0;transition:opacity .45s ease;z-index:-1}
+.orb-wrap[data-state=contract] .orb:before{opacity:1}
+.orb-wrap[data-state] .orb:after{content:"";position:absolute;inset:3px;border-radius:inherit;border:1px solid #ffffff18;pointer-events:none}
+.orb-wrap[data-state] .orb strong{color:#122f40;font-variant-numeric:tabular-nums;transition:color .35s;line-height:1.05}
+.orb-wrap[data-state=contract] .orb strong{color:#452819}
+.orb-wrap[data-state] .orb small{color:#24475c;transition:color .35s;margin-top:7px}
+.orb-wrap[data-state=contract] .orb small{color:#664029}
+.orb-wrap[data-state=paused] .orb{background:radial-gradient(circle at 32% 24%,#c9ccd5,#858c9c 58%,#4d5261);box-shadow:inset 0 2px 7px #ffffff45,0 15px 45px #0004}
+.orb-wrap[data-state=paused] .orb strong,.orb-wrap[data-state=paused] .orb small{color:#252b39}
+.orb-wrap[data-state]:before,.orb-wrap[data-state]:after{content:"";position:absolute;border-radius:50%;border:1px solid rgba(var(--phase-rgb),.15);pointer-events:none;transition:border-color .55s,transform .9s cubic-bezier(.22,.8,.25,1);z-index:-1}
+.orb-wrap[data-state]:before{inset:23px}.orb-wrap[data-state]:after{inset:40px;border-color:rgba(var(--phase-rgb),.09)}
+.orb-wrap[data-state=contract]:before{transform:scale(.86)}.orb-wrap[data-state=contract]:after{transform:scale(.84)}
+.orb-wrap[data-state=relax]:before{transform:scale(1.02)}.orb-wrap[data-state=relax]:after{transform:scale(1.06)}
+.phase-ring{position:absolute;inset:0;width:100%;height:100%;overflow:visible;transform:rotate(-90deg);pointer-events:none}
+.phase-ring circle{fill:none;stroke-width:2}.phase-track{stroke:#ffffff0b}.phase-arc{stroke:var(--phase-color);stroke-linecap:round;stroke-dasharray:892.212;stroke-dashoffset:calc(892.212 * (1 - var(--phase-remaining)));transition:stroke .4s,stroke-dashoffset .12s linear;filter:drop-shadow(0 0 5px rgba(var(--phase-rgb),.18))}
+.orb-wrap[data-state=paused] .phase-arc{opacity:.4}
+#session[data-kegel-state=contract] #phase{color:#f1bc87}#session[data-kegel-state=relax] #phase{color:#9cdae6}#session[data-kegel-state=paused] #phase{color:#b4b8c4}
+#session[data-kegel-state] #phase{transition:color .35s}#session[data-kegel-state] #seconds{min-width:2ch}
+@media(prefers-reduced-motion:reduce){.orb-wrap[data-state] .orb{transform:none!important;transition:none!important;will-change:auto}.orb-wrap[data-state]:before,.orb-wrap[data-state]:after{transform:none!important;transition:none}.orb-wrap[data-state] .orb:before,.phase-arc{transition:none}}
+
