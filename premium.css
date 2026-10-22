@@ -123,3 +123,24 @@ nav button span{font-size:14px}
  .setting select{font-size:16px;max-width:100%}
  .session-head .eyebrow,.session-body>.eyebrow{font-size:11px}
 }
+
+/* Botanical milestones and quiet session rewards. */
+.journey-mini{display:inline-flex;width:28px;height:28px;color:#e4b58c;vertical-align:middle;margin-right:7px}.journey-mini svg{width:100%;height:100%}
+.journey-intro{margin-bottom:25px}.journey-intro h2,.weekly-card h2{margin:12px 0}
+.journey-route{max-width:700px;margin:0 auto 25px;position:relative}
+.journey-step{position:relative;display:flex;align-items:center;gap:20px;width:100%;text-align:left;background:none;color:#8c919e;border:0;padding:15px 16px;min-height:98px;border-radius:20px}
+.journey-step:before{content:"";position:absolute;left:44px;top:72px;bottom:-25px;width:1px;background:#34363e}
+.journey-step:last-child:before{display:none}.journey-step.unlocked:before{background:#ad86624a}
+.journey-node{width:56px;height:56px;flex:none;display:grid;place-items:center;border-radius:50%;background:#1c1e24;border:1px solid #3a3c45;z-index:1}
+.journey-node svg{width:29px;height:29px}.unlocked .journey-node{color:#e4b58c;background:#30271f;border-color:#8e6c4a}
+.journey-step.current{background:linear-gradient(100deg,#e4b58c0d,transparent);color:#f2ede7}.current .journey-node{box-shadow:0 0 0 5px #e4b58c08;border-color:#e4b58c}
+.journey-caption{display:grid;gap:5px}.journey-caption small{font-size:10px;letter-spacing:1.2px}.journey-caption b{font-size:18px;font-weight:550}.journey-caption>span{font-size:12px}
+.journey-status{margin-left:auto;color:#d5b493;font-size:12px}.journey-detail{margin-bottom:32px}.journey-detail h2{margin:10px 0}
+.weekly-card{margin-top:18px}.weekly-card h2{font-size:18px}.weekly-values{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:22px 0}
+.weekly-values>div{display:grid;gap:8px}.weekly-values strong{font-size:28px;font-weight:450;font-variant-numeric:tabular-nums}.weekly-values span{font-size:12px;color:#a9adb8}.weekly-card>.muted{font-size:12px;margin-bottom:0}
+.journey-finish{max-width:520px;margin:35px auto}.completion-emblem{display:grid;place-items:center;width:94px;height:94px;margin:0 auto 28px;border-radius:50%;color:#e4b58c;background:radial-gradient(circle,#e4b58c13,transparent);border:1px solid #e4b58c35;animation:completion-arrive .6s ease-out}
+.completion-emblem svg{width:49px;height:49px}.completion-xp{font-size:26px;color:#e4b58c;margin:15px 0 25px}.journey-finish .card{text-align:left}.journey-finish .xp-top h2{font-size:21px}.journey-finish .card .muted{font-size:13px}
+.comfort-card{margin:28px 0}.comfort-card h2{font-size:18px}.comfort-options{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin-top:18px}.comfort-options button{padding:12px 15px;border:1px solid transparent}.comfort-options [aria-pressed=true]{border-color:#e4b58c;background:#342b23;color:#f1ccac}.comfort-card .muted{font-size:14px}
+@keyframes completion-arrive{from{opacity:0;transform:scale(.85)}to{opacity:1;transform:scale(1)}}
+@media(max-width:650px){.journey-step{padding-left:6px;padding-right:6px}.journey-step:before{left:34px}.journey-caption b{font-size:17px}.journey-intro{padding:22px}.weekly-values{gap:9px}.weekly-values span{font-size:12px}.journey-finish{margin-top:25px}.comfort-options button{flex:1 1 110px}.journey-finish h1{font-size:30px}}
+@media(prefers-reduced-motion:reduce){.completion-emblem{animation:none}}
