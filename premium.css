@@ -250,3 +250,8 @@ nav button.active{background:#493023;color:#f0bd98}
 @media(max-width:650px){.workout.kegel-card{grid-template-columns:33px minmax(0,1fr);min-height:145px;column-gap:13px;row-gap:21px}.kegel-card-progress>span{font-size:10px}}
 
 .level-jump{padding:0 23px 18px}.level-jump p{font-size:12px;color:#adb0bb;line-height:1.6;margin:0 0 12px}.level-jump .secondary{padding:12px 16px;font-size:13px;color:#f0bd98;background:#493328;border:1px solid #a47b5540}
+
+/* Keep the daily counter inside the ring and its caption below it. */
+.hero .ring{position:relative;margin-bottom:24px}
+.hero .ring small{position:absolute;top:calc(100% + 10px);left:50%;transform:translateX(-50%);width:max-content;max-width:135px;margin:0;text-align:center;font-size:8px;line-height:1.3;letter-spacing:.6px}
+@media(max-width:650px){.hero .ring small{font-size:7px;max-width:115px;letter-spacing:.4px}}
