@@ -52,6 +52,14 @@ function showRoutineCompletion(){
 function routineCard(id,title,description,icon,disabled=false){
  return '<article class="workout"><div class="workout-icon">'+premiumIcon(icon)+'</div><div><h3>'+title+'</h3><p>'+description+'</p></div><button data-routine-session="'+id+'" aria-label="'+(disabled?'Sesión completada o no disponible':'Empezar '+title)+'" '+(disabled?'disabled':'')+'>'+premiumIcon(disabled&&description.startsWith('Completada')?'check':'arrow')+'</button></article>';
 }
+function dailyPulseCount(a,date=dayKey()){
+ const activities=data.activities||[];
+ return routineCompleted(a)+Number(activities.some(x=>x.date===date&&x.type==='breath')||!!data.days[date]?.breath)+Number(activities.some(x=>x.date===date&&x.type==='control'));
+}
+function dailyPulseMarkup(count){
+ const label=count+' de 4 actividades completadas hoy: dos Kegel, respiración y control de ritmo.';
+ return '<span class="daily-pulse" role="img" aria-label="'+label+'" title="'+label+'" style="--daily-scale:'+(.58+count*.105)+';--daily-glow:'+(count*.055)+'"><svg viewBox="0 0 48 48" aria-hidden="true"><circle class="daily-pulse-track" cx="24" cy="24" r="21"/><circle class="daily-pulse-progress" cx="24" cy="24" r="21" pathLength="100" stroke-dasharray="'+(count*25)+' 100"/><path class="daily-pulse-wave" d="M9 25h6l4-10 7 19 5-13 3 4h5"/></svg></span>';
+}
 function kegelCard(a,r){
  const count=routineCompleted(a),next=!a.slots.morning?'morning':'evening',done=count===2;
  return '<article class="workout kegel-card"><div class="workout-icon">'+premiumIcon('strength')+'</div><div class="kegel-card-info"><h3>Kegel</h3><p>'+fmt(R.duration(r))+' min por sesión</p></div><button data-routine-session="'+next+'" aria-label="'+(done?'Kegel completado hoy':'Empezar Kegel · sesión '+(next==='morning'?'1':'2')+' de 2')+'" '+(done?'disabled':'')+'>'+premiumIcon(done?'check':'arrow')+'</button><div class="kegel-card-progress"><span>'+count+' de 2 sesiones completadas</span><div class="progress-track" role="progressbar" aria-label="Sesiones de Kegel completadas hoy" aria-valuemin="0" aria-valuemax="2" aria-valuenow="'+count+'"><div style="width:'+(count*50)+'%"></div></div></div></article>';
@@ -93,6 +101,7 @@ render=function(){
  if(tab==='plan'){routinePlanView();return;}
  const xp=$('.xp-card');if(xp){xp.querySelector('h2').textContent='Nivel '+(s.level+1)+' de 10';xp.querySelector('.eyebrow').textContent='RECORRIDO · DÍA '+(s.day+1)+' DE '+R.programs[s.level].days.length;xp.querySelector('.progress-track>div').style.width=((R.ordinal(s.level,s.day)+(s.finished?1:0))/54*100)+'%';}
  if(tab==='hoy'){
+ $('.top')?.insertAdjacentHTML('beforeend',dailyPulseMarkup(dailyPulseCount(a)));
  const hero=$('.hero');hero.querySelector('h2').textContent=c===2?'Día completado':'Dos momentos para ti';hero.querySelector('.ring').style.setProperty('--progress',(c/2*100)+'%');hero.querySelector('.ring strong').innerHTML=c+'<span style="font-size:19px"> / 2</span>';hero.querySelector('.ring small').textContent='KEGEL COMPLETADOS';
  hero.querySelector('.eyebrow').textContent=routineLabel(a);
  const optionalReady=c===2&&!a.slots.extra;

@@ -255,3 +255,13 @@ nav button.active{background:#493023;color:#f0bd98}
 .hero .ring{position:relative;margin-bottom:24px}
 .hero .ring small{position:absolute;top:calc(100% + 10px);left:50%;transform:translateX(-50%);width:max-content;max-width:135px;margin:0;text-align:center;font-size:8px;line-height:1.3;letter-spacing:.6px}
 @media(max-width:650px){.hero .ring small{font-size:7px;max-width:115px;letter-spacing:.4px}}
+
+/* Four daily activities grow one quiet pulse in the home header. */
+.top>.daily-pulse{display:grid;place-items:center;width:48px;height:48px;flex:none;margin-left:auto;isolation:isolate}
+.daily-pulse svg{display:block;width:46px;height:46px;overflow:visible;transform:scale(var(--daily-scale));transition:transform .65s ease;filter:drop-shadow(0 0 9px rgba(239,180,138,var(--daily-glow)))}
+.daily-pulse circle{fill:none;stroke-width:1.2}
+.daily-pulse-track{stroke:#d6a58324}
+.daily-pulse-progress{stroke:#efb48a;transform:rotate(-90deg);transform-origin:24px 24px;stroke-linecap:round}
+.daily-pulse-wave{fill:none;stroke:#efb48a;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+@media(max-width:650px){.top>.daily-pulse{display:grid!important;width:40px;height:40px}.daily-pulse svg{width:39px;height:39px}}
+@media(prefers-reduced-motion:reduce){.daily-pulse svg{transition:none}}
