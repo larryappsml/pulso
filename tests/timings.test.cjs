@@ -36,3 +36,8 @@ vm.runInContext(`for(const level of levels){const phases=buildKegelPhases(level)
 console.log('PASS: proportional segment lengths, 100% width, phase colors, contiguous seconds, accessibility.');
 
 
+
+vm.runInContext(`for(const level of levels){const s=sessionTimeline(buildKegelPhases(level)),total=kegelDuration(level);s.forEach((p,i)=>{assert.equal(timelineY(p,s[i-1],1),p.state==='contract'?9:29);assert.equal(timelineY(p,s[i-1],0),(s[i-1]||p).state==='contract'?9:29);const d=timelinePath(p,s[i-1],total);assert(d.startsWith('M '+(p.start/total*1000)+' '));assert(d.endsWith('L '+(p.end/total*1000)+' '+(p.state==='contract'?9:29)));});}assert(timelineMarkup(buildKegelPhases(levels[0])).includes('timeline-wave'));`,ctx);
+console.log('PASS: waveform endpoints, phase colors and proportional time mapping.');
+
+
