@@ -248,3 +248,5 @@ nav button.active{background:#493023;color:#f0bd98}
 .kegel-card-progress .progress-track>div{height:100%;background:linear-gradient(90deg,#bd8257,#edb58d);transition:width .35s ease}
 .kegel-card:has(button:disabled) .progress-track>div{background:#a9c19f}
 @media(max-width:650px){.workout.kegel-card{grid-template-columns:33px minmax(0,1fr);min-height:145px;column-gap:13px;row-gap:21px}.kegel-card-progress>span{font-size:10px}}
+
+.level-jump{padding:0 23px 18px}.level-jump p{font-size:12px;color:#adb0bb;line-height:1.6;margin:0 0 12px}.level-jump .secondary{padding:12px 16px;font-size:13px;color:#f0bd98;background:#493328;border:1px solid #a47b5540}

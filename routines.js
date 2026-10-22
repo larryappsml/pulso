@@ -24,6 +24,13 @@
  function available(s,l,d){return validPosition(l,d)&&ordinal(l,d)<=ordinal(s.level,s.day);}
  function assignment(s,date){if(!s.calendar[date])s.calendar[date]={level:s.level,day:s.day,slots:{},completed:false};return s.calendar[date];}
  function next(s){if(s.day+1<programs[s.level].days.length)s.day++;else if(s.level<9){s.level++;s.day=0;}else s.finished=true;}
+ function jumpLevel(s,level,date){
+  if(!Number.isInteger(level)||level<=s.level||!validPosition(level,0)||!/^\d{4}-\d{2}-\d{2}$/.test(date)||s.finished)return {changed:false};
+  const a=s.calendar[date],started=!!a&&Object.keys(a.slots).length>0;
+  s.level=level;s.day=0;s.finished=false;
+  if(!started)s.calendar[date]={level,day:0,slots:{},completed:false};
+  return {changed:true,tomorrow:started};
+ }
  function record(s,entry){
   if(!validPosition(entry.level,entry.day)||s.sessions.some(x=>x.id===entry.id))return {saved:false,advanced:false};
   if(!['morning','evening','extra','replay'].includes(entry.type))return {saved:false,advanced:false};
@@ -42,5 +49,5 @@
   const ids=new Set(s.sessions.map(x=>x.id));if(ids.size!==s.sessions.length)return false;
   return Object.entries(s.calendar).every(([date,a])=>/^\d{4}-\d{2}-\d{2}$/.test(date)&&a&&validPosition(a.level,a.day)&&typeof a.completed==='boolean'&&a.slots&&typeof a.slots==='object'&&!Array.isArray(a.slots)&&Object.entries(a.slots).every(([type,id])=>['morning','evening','extra'].includes(type)&&typeof id==='string'&&s.sessions.some(x=>x.id===id&&x.date===date&&x.type===type&&same(x,a)))&&a.completed===!!(a.slots.morning&&a.slots.evening));
  }
- root.PulsoRoutines={programs,routine,duration,reps,phases,newState,assignment,record,valid,validPosition,available,ordinal};
+ root.PulsoRoutines={programs,routine,duration,reps,phases,newState,assignment,record,valid,validPosition,available,ordinal,jumpLevel};
 })(typeof window!=='undefined'?window:globalThis);
