@@ -73,19 +73,16 @@ body{background:#111216;color:var(--ink)}aside{background:#15161b;border-color:#
 @media(prefers-reduced-motion:reduce){#session .timeline-segment{transition:none}}
 
 
-/* A continuous, quiet waveform; horizontal distance remains exact elapsed time. */
-#session .session-timeline{height:40px;margin:27px 4px 41px;border-radius:0;--cursor-y:9px}
-#session .session-timeline .timeline-segments{height:40px;border-radius:0;overflow:visible;box-shadow:none}
+/* Slim continuous timeline, with exact phase durations. */
+#session .session-timeline{height:40px;margin:24px 4px 32px;border-radius:0;--cursor-y:20px}
+#session .session-timeline .timeline-segments{height:40px;border-radius:0;overflow:visible;background:none}
 #session .timeline-wave{display:block;width:100%;height:40px;overflow:visible}
-#session .timeline-wave .timeline-segment{fill:none;background:none;box-shadow:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round;vector-effect:non-scaling-stroke;opacity:.4;transition:opacity .35s}
+#session .timeline-wave .timeline-segment{fill:none;background:none;box-shadow:none;stroke-width:3;stroke-linecap:butt;vector-effect:non-scaling-stroke;opacity:.32;transition:opacity .3s}
 #session .timeline-wave .timeline-segment[data-state=contract]{stroke:#e4b58c;background:none}
 #session .timeline-wave .timeline-segment[data-state=relax]{stroke:#91cbd7;background:none}
 #session .timeline-wave .timeline-segment.is-complete{opacity:.85}
-#session .timeline-wave .timeline-segment.is-current{opacity:1;stroke-width:2.6}
+#session .timeline-wave .timeline-segment.is-current{opacity:1}
 #session .session-timeline .timeline-elapsed{height:40px;background:none}
-#session .timeline-elapsed:before{content:"";position:absolute;right:0;top:0;height:39px;width:1px;background:linear-gradient(transparent,#e8e7e424,transparent)}
-#session .timeline-elapsed:after{right:-3px;top:calc(var(--cursor-y) - 3px);width:6px;height:6px;border-radius:50%;background:#f5ede1;box-shadow:0 0 0 4px #f5ede10a,0 0 9px #f5ede125}
-#session .session-timeline .timeline-times{display:flex;justify-content:space-between;position:absolute;top:48px;left:0;right:0;width:100%;height:auto;background:none;border-radius:0;color:#8c919e;font-size:10px;font-variant-numeric:tabular-nums;letter-spacing:.4px}
-@media(max-width:650px){#session .session-timeline{margin:25px 3px 39px}#session .timeline-wave .timeline-segment{stroke-width:1.8}#session .timeline-wave .timeline-segment.is-current{stroke-width:2.2}#session .timeline-elapsed:after{width:5px;height:5px;right:-2.5px;top:calc(var(--cursor-y) - 2.5px)}#session .session-timeline .timeline-times{font-size:9px}}
+#session .timeline-elapsed:after{right:-3px;top:17px;width:6px;height:6px;border-radius:50%;background:#f5ede1;box-shadow:0 0 0 3px #f5ede10d}
+#session .session-timeline .timeline-times{display:flex;justify-content:space-between;position:absolute;top:38px;left:0;right:0;width:100%;height:auto;background:none;color:#828793;font-size:10px;font-variant-numeric:tabular-nums;letter-spacing:.4px}
 @media(prefers-reduced-motion:reduce){#session .timeline-wave .timeline-segment{transition:none}}
-
