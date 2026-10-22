@@ -170,3 +170,19 @@ nav button span{font-size:14px}
 .routine-block{display:flex;align-items:center;gap:13px;background:#1c1e24;border:1px solid #30333c;border-radius:17px;padding:16px}
 .routine-block-icon{width:35px;height:35px;display:grid;place-items:center;color:#d8b28e;flex:none}.routine-block-icon svg{width:24px;height:24px}.routine-block>div{display:grid;gap:7px}.routine-block b{font-size:15px;font-weight:500}.routine-block span:not(.routine-block-icon){font-size:13px;color:#aeb5c0}.routine-block>small{margin-left:auto;font-size:11px;color:#7e8694}.routine-preview-note{font-size:14px;color:#b6bdc7;line-height:1.7;margin:22px 0}.routine-preview>.primary{min-height:49px;min-width:160px}
 @media(max-width:650px){.routine-preview{margin-top:20px}.routine-preview h1{font-size:28px}.routine-blocks{gap:8px;margin:20px 0}.routine-block{padding:14px 11px;gap:9px}.routine-block b{font-size:14px}.routine-block>small{display:none}.routine-level summary{padding:20px}.routine-days{padding:0 12px 12px}.routine-day{padding:14px 12px}.routine-day small{font-size:12px}.routine-day-state{font-size:11px}}
+
+/* Timeline describes blocks, not individual contractions. */
+#session .block-timeline{margin-bottom:76px}
+#session .timeline-wave .timeline-block{stroke:#e4b58c;stroke-width:3;opacity:.34}
+#session .timeline-wave .timeline-block[data-kind=quick]{stroke:#91cbd7}
+#session .timeline-wave .timeline-block[data-block="3"]{stroke:#9ebedb}
+#session .timeline-wave .timeline-block[data-block="4"]{stroke:#b0b7d5}
+#session .timeline-wave .timeline-block.is-complete{opacity:.8}
+#session .timeline-wave .timeline-block.is-current{opacity:1;stroke-width:4}
+#session .timeline-divider{fill:none;stroke:#111216;stroke-width:2;vector-effect:non-scaling-stroke}
+#session .session-timeline .timeline-block-labels{display:flex;position:absolute;top:34px;left:0;width:100%;height:auto;background:none}
+#session .timeline-block-labels>span{display:block;text-align:center;font-size:11px;line-height:1.25;color:#8f97a5;background:none}
+#session .timeline-block-labels small{display:block;font-size:11px}
+#session .timeline-block-labels .is-current{color:#e5d1bd}
+#session .block-timeline .timeline-times{top:68px;font-size:11px}
+@media(max-width:650px){#session .session-body:has(#pause) .block-timeline{margin-bottom:76px}#session .timeline-block-labels>span,#session .timeline-block-labels small{font-size:11px}}

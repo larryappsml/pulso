@@ -50,7 +50,7 @@ function showRoutineCompletion(){
  $('#routine-back').onclick=()=>{$('#session').hidden=true;routineNotice=null;navigate('hoy');};
 }
 function routineCard(id,title,description,icon,disabled=false){
- return '<article class="workout"><div class="workout-icon">'+premiumIcon(icon)+'</div><div><h3>'+title+'</h3><p>'+description+'</p></div><button data-routine-session="'+id+'" aria-label="'+(disabled?'Sesión completada o no disponible':'Empezar '+title)+'" '+(disabled?'disabled':'')+'>'+premiumIcon(disabled?'check':'arrow')+'</button></article>';
+ return '<article class="workout"><div class="workout-icon">'+premiumIcon(icon)+'</div><div><h3>'+title+'</h3><p>'+description+'</p></div><button data-routine-session="'+id+'" aria-label="'+(disabled?'Sesión completada o no disponible':'Empezar '+title)+'" '+(disabled?'disabled':'')+'>'+premiumIcon(disabled&&description.startsWith('Completada')?'check':'arrow')+'</button></article>';
 }
 function routinePlanView(){
  const s=routineState(),a=routineToday(),total=R.programs.reduce((n,p)=>n+p.days.length,0),completeDays=R.ordinal(s.level,s.day)+(s.finished?1:0);
@@ -59,6 +59,7 @@ function routinePlanView(){
  const isToday=r.level===a.level&&r.day===a.day,status=past?'Completado':current?'Actual':'Pendiente';
  return '<button class="routine-day '+(current?'current ':'')+(past?'done':'')+'" data-open-routine="'+r.level+':'+r.day+'" '+(available?'':'disabled')+'><span><b>Día '+(r.day+1)+'</b><small>'+fmt(R.duration(r))+' min · '+R.reps(r)+' contracciones</small></span><span class="routine-day-state">'+(isToday&&a.completed?'Hoy · 2/2':status)+'</span></button>';
  }).join('')+'</div></details>').join('')+'</div><p class="muted">Las repeticiones de días anteriores no cambian tu progreso. Los días sin practicar no borran el avance. Si hay dolor, tensión o dificultad para relajar, pausa o termina.</p>';
+ const top=$('.top');if(top)top.insertAdjacentHTML('afterbegin','<span class="mobile-wordmark">pulso<span>®</span></span>');
  bind();
  document.querySelectorAll('[data-open-routine]').forEach(b=>b.onclick=()=>openRoutineDetail(...b.dataset.openRoutine.split(':').map(Number)));
 }
