@@ -3,8 +3,8 @@ const source=fs.readFileSync(require('node:path').join(__dirname,'../app.js'),'u
 function boot(seed){const nodes={},el=()=>({innerHTML:'',style:{setProperty(k,v){this[k]=v;}},dataset:{},setAttribute(k,v){this[k]=v;},querySelector(){return {textContent:''};},classList:{toggle(){}},textContent:''});const c={assert,console,now:0,localStorage:{getItem:()=>seed?JSON.stringify(seed):null,setItem(){}},document:{querySelector:s=>nodes[s]??=el(),querySelectorAll:()=>[],addEventListener(){}},window:{scrollTo(){},addEventListener(){}},location:{hash:''},history:{replaceState(){}},Date,performance:{now:()=>c.now},setTimeout(){},clearInterval(){},setInterval:()=>1,requestAnimationFrame:f=>f(),navigator:{},confirm:()=>true};vm.createContext(c);vm.runInContext(source,c);return c;}
 const ctx=boot();
 vm.runInContext(`
-const totals=[94,164,196,260];
-for(let i=0;i<4;i++){
+const totals=[94,112,164,176,196,260];
+for(let i=0;i<6;i++){
  const l=levels[i],p=buildKegelPhases(l);assert.equal(kegelDuration(l),totals[i]);
  assert.equal(p.filter(x=>x.block==='long'&&x.expand).length,l.reps);
  assert.equal(p.filter(x=>x.block==='quick'&&x.expand).length,l.quickReps);
@@ -26,8 +26,8 @@ assert.equal(credits,1);assert.equal(transitions,1);tick();assert.equal(credits,
 prepare('evening');startSession();now+=1000;tick();closeSession();assert.equal(credits,1);assert.equal(active,null);
 prepare('breath');assert.equal(active.totalSeconds,120);assert.equal(active.phases.length,24);
 `,ctx);
-for(let i=0;i<4;i++){const legacy=boot({level:i,days:{'2026-10-21':{morning:1}},activities:[{id:'kept'}]});vm.runInContext(`assert.equal(data.level,${[0,0,1,1][i]});assert.equal(data.days['2026-10-21'].morning,1);assert.equal(data.activities[0].id,'kept');`,legacy);const current=boot({level:i,kegelTimingVersion:2});vm.runInContext(`assert.equal(data.level,${i});`,current);}
-console.log('PASS: 4 combined programs, exact durations, short cues/full rests, transition and final rest, block labels, pause/resume, one completion, abort uncredited, breathing unchanged.');
+for(let i=0;i<4;i++){const legacy=boot({level:i,days:{'2026-10-21':{morning:1}},activities:[{id:'kept'}]});vm.runInContext(`assert.equal(data.level,${[0,0,2,2][i]});assert.equal(data.days['2026-10-21'].morning,1);assert.equal(data.activities[0].id,'kept');`,legacy);const current=boot({level:i,kegelTimingVersion:2});vm.runInContext(`assert.equal(data.level,${[0,2,4,5][i]});`,current);}
+console.log('PASS: 6 combined programs, exact durations, short cues/full rests, transition and final rest, block labels, pause/resume, one completion, abort uncredited, breathing unchanged.');
 
 
 
@@ -41,3 +41,5 @@ vm.runInContext(`for(const level of levels){const s=sessionTimeline(buildKegelPh
 console.log('PASS: straight line endpoints, phase colors and proportional time mapping.');
 
 
+
+for(let i=0;i<6;i++){const c=boot({level:i,kegelTimingVersion:3});vm.runInContext('assert.equal(data.level,'+i+');upgradeKegelTimings();assert.equal(data.level,'+i+');',c);}console.log('PASS: all six saved levels remain unchanged after migration.');
