@@ -236,3 +236,15 @@ nav button.active{background:#493023;color:#f0bd98}
 .control-body #cool-view{min-height:44px}
 .control-body .control-actions{margin-top:20px}
 @media(max-width:650px){.control-body{margin-top:20px}.control-body .control-clock{font-size:64px}.control-body .orb-wrap{width:250px;height:250px;margin:18px auto}}
+
+/* One daily Kegel card spans both columns. */
+.workout.kegel-card{grid-column:1 / -1;display:grid;grid-template-columns:37px minmax(0,1fr);column-gap:15px;row-gap:22px;align-content:center;min-height:152px}
+.kegel-card .workout-icon{margin:0;align-self:center}
+.kegel-card .kegel-card-info{padding-right:35px}
+.kegel-card .kegel-card-info p{max-width:none}
+.kegel-card .kegel-card-progress{grid-column:1 / -1;width:100%}
+.kegel-card-progress>span{display:block;font-size:11px;color:#adb0bb;margin-bottom:10px}
+.kegel-card-progress .progress-track{height:5px;margin:0;border-radius:10px;overflow:hidden;background:#45392f}
+.kegel-card-progress .progress-track>div{height:100%;background:linear-gradient(90deg,#bd8257,#edb58d);transition:width .35s ease}
+.kegel-card:has(button:disabled) .progress-track>div{background:#a9c19f}
+@media(max-width:650px){.workout.kegel-card{grid-template-columns:33px minmax(0,1fr);min-height:145px;column-gap:13px;row-gap:21px}.kegel-card-progress>span{font-size:10px}}

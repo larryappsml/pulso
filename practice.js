@@ -52,6 +52,10 @@ function showRoutineCompletion(){
 function routineCard(id,title,description,icon,disabled=false){
  return '<article class="workout"><div class="workout-icon">'+premiumIcon(icon)+'</div><div><h3>'+title+'</h3><p>'+description+'</p></div><button data-routine-session="'+id+'" aria-label="'+(disabled?'Sesión completada o no disponible':'Empezar '+title)+'" '+(disabled?'disabled':'')+'>'+premiumIcon(disabled&&description.startsWith('Completada')?'check':'arrow')+'</button></article>';
 }
+function kegelCard(a,r){
+ const count=routineCompleted(a),next=!a.slots.morning?'morning':'evening',done=count===2;
+ return '<article class="workout kegel-card"><div class="workout-icon">'+premiumIcon('strength')+'</div><div class="kegel-card-info"><h3>Kegel</h3><p>'+fmt(R.duration(r))+' min por sesión</p></div><button data-routine-session="'+next+'" aria-label="'+(done?'Kegel completado hoy':'Empezar Kegel · sesión '+(next==='morning'?'1':'2')+' de 2')+'" '+(done?'disabled':'')+'>'+premiumIcon(done?'check':'arrow')+'</button><div class="kegel-card-progress"><span>'+count+' de 2 sesiones completadas</span><div class="progress-track" role="progressbar" aria-label="Sesiones de Kegel completadas hoy" aria-valuemin="0" aria-valuemax="2" aria-valuenow="'+count+'"><div style="width:'+(count*50)+'%"></div></div></div></article>';
+}
 function routinePlanView(){
  const s=routineState(),a=routineToday(),total=R.programs.reduce((n,p)=>n+p.days.length,0),completeDays=R.ordinal(s.level,s.day)+(s.finished?1:0);
  $('#main').innerHTML=header('Tu recorrido.','Dos Kegel completan cada día. Una tercera sesión es opcional. Avanzas como máximo un día de rutina por fecha.')+'<section class="card routine-overview"><span class="eyebrow">TU AVANCE</span><h2>'+routineLabel(s)+'</h2><p class="muted">'+completeDays+' de '+total+' días completados'+(s.finished?' · Recorrido completado':'')+'</p></section><div class="routine-levels">'+R.programs.map(p=>'<details class="card routine-level" '+(p.level===s.level?'open':'')+'><summary><span>Nivel '+(p.level+1)+'</span><small>'+p.days.length+' días</small><span aria-hidden="true">⌄</span></summary><div class="routine-days">'+p.days.map(r=>{
@@ -85,7 +89,7 @@ render=function(){
  const optionalReady=c===2&&!a.slots.extra;
  $('#premium-start').innerHTML=(optionalReady?'Sesión opcional':c===2?'Ver rutina':'Empezar')+' '+premiumIcon('arrow');
  $('#premium-start').onclick=()=>optionalReady?prepare('extra'):c===2?openRoutineDetail(a.level,a.day):prepare(!a.slots.morning?'morning':'evening');
- const grid=$('.routine-grid');grid.innerHTML=routineCard('morning','Kegel · 1',a.slots.morning?'Completada':fmt(R.duration(r))+' min','strength',!!a.slots.morning)+routineCard('evening','Kegel · 2',a.slots.evening?'Completada':fmt(R.duration(r))+' min','target',!!a.slots.evening)+routineCard('breath','Respiración',today().breath?'Completada':'2 min · Aparte del recorrido','breath',!!today().breath)+routineCard('control','Control de ritmo','Libre','rhythm');
+ const grid=$('.routine-grid');grid.innerHTML=kegelCard(a,r)+routineCard('breath','Respiración',today().breath?'Completada':'2 min · Aparte del recorrido','breath',!!today().breath)+routineCard('control','Control de ritmo','Libre','rhythm');
  document.querySelectorAll('[data-routine-session]').forEach(b=>b.onclick=()=>prepare(b.dataset.routineSession));
  if(xp)xp.insertAdjacentHTML('beforeend','<p class="practice-caption">'+(a.completed?'Hoy completado · Próxima rutina mañana':c+'/2 Kegel completados hoy')+'</p>');
  }
